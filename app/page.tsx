@@ -1,65 +1,228 @@
-import Image from "next/image";
+"use client"
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// Assuming Navbar is a default export from your components folder
+import Navbar from "./components/Navbar";
+
+const techs = ["Next.js", "Vite", "MongoDB"];
+
+const projects = [
+  {
+    "title": "Coming Soon",
+    "desc": "I am sorting through my projects. Past projects will be added soon!"
+  }
+];
+
+function Hero() {
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center px-16 overflow-hidden"
+    >
+      {/* Vector SVG background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/vector.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.4,
+        }}
+      />
+
+      {/* Purple glow */}
+      <div className="absolute top-0 right-0 w-3/4 h-full bg-purple-900/50 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-2xl">
+        <h1
+          className="text-5xl md:text-6xl font-bold text-white leading-tight mb-6"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          Make your{" "}
+          <span
+            className="text-purple-400 italic"
+            style={{ fontFamily: "var(--font-sail)" }}
+          >
+            visions
+          </span>{" "}
+          come to life
+        </h1>
+
+        <p
+          className="text-gray-400 text-base leading-relaxed mb-10 max-w-lg"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          I specialize in creating beautiful web designs and creating c++ projects!
+        </p>
+
+        <div className="flex gap-4">
+          <a
+            href="#contact"
+            className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-6 py-3 rounded-md transition-all duration-200 flex items-center gap-2"
+            style={{ fontFamily: "var(--font-outfit)" }}
+          >
+            Get Started <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
+          </a>
+          <a
+            href="#past-work"
+            className="bg-transparent border border-white/25 hover:bg-white/10 text-white text-sm px-6 py-3 rounded-md transition-all duration-200 flex items-center gap-2"
+            style={{ fontFamily: "var(--font-outfit)" }}
+          >
+            View Past Work <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TechStack() {
+  const scrollingTechs = [...techs, ...techs, ...techs, ...techs];
+
+  return (
+    <section className="relative bg-black/40 border-y border-white/5 py-10 overflow-hidden">
+      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+
+      <div className="flex w-max animate-infinite-scroll">
+        {scrollingTechs.map((tech, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-center px-12 group"
+          >
+            <span
+              className="text-white/30 text-3xl font-bold tracking-tighter uppercase italic transition-all duration-500 group-hover:text-purple-400 group-hover:scale-110 cursor-default select-none"
+              style={{ fontFamily: "var(--font-outfit)" }}
+            >
+              {tech}
+            </span>
+            <div className="ml-12 w-1.5 h-1.5 rounded-full bg-purple-500/20 group-hover:bg-purple-500/50 transition-colors" />
+          </div>
+        ))}
+      </div>
+
+      <style jsx global>{`
+        @keyframes infinite-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-infinite-scroll {
+          animation: infinite-scroll 40s linear infinite;
+        }
+      `}</style>
+    </section>
+  );
+}
+
+function PastWork() {
+  return (
+    <section
+      id="past-work"
+      className="relative min-h-screen px-16 py-32 overflow-hidden"
+    >
+      <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-purple-900/30 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="relative z-10">
+        <h2
+          className="text-4xl font-bold text-white mb-2"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          Past{" "}
+          <span
+            className="text-purple-400 italic"
+            style={{ fontFamily: "var(--font-sail)" }}
+          >
+            Work
+          </span>
+        </h2>
+        <p
+          className="text-gray-500 text-sm mb-14"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          Here are some of my recent projects. You can view more via my Github
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {projects.map(({ title, desc }) => (
+            <div
+              key={title}
+              className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300"
+            >
+              <h3
+                className="text-white font-semibold text-lg mb-2"
+                style={{ fontFamily: "var(--font-outfit)" }}
+              >
+                {title}
+              </h3>
+              <p
+                className="text-gray-400 text-sm leading-relaxed"
+                style={{ fontFamily: "var(--font-outfit)" }}
+              >
+                {desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = () => {
+    const subject = encodeURIComponent("Portfolio Contact from " + name);
+    const body = encodeURIComponent("Name: " + name + "\n\nMessage:\n" + message);
+    window.location.href = "mailto:drakebouth.gsrp@gmail.com?subject=" + subject + "&body=" + body;
+  };
+
+  return (
+    <section id="contact" className="relative px-16 py-32 overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-purple-900/25 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-xl">
+        <h2
+          className="text-4xl font-bold text-white mb-2"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          Get in{" "}
+          <span
+            className="text-purple-400 italic"
+            style={{ fontFamily: "var(--font-sail)" }}
+          >
+            Touch
+          </span>
+        </h2>
+        <p
+          className="text-gray-500 text-sm mb-10"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >
+          Have a project in mind? Let us build something great together.
+        </p>
+
+        <h2
+          className="text-2xl font-bold text-white mb-2"
+          style={{ fontFamily: "var(--font-outfit)" }}
+        >Not currently taking requests or contacts.</h2>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="bg-black">
+      {/* 1. Navbar added here */}
+      <Navbar /> 
+      
+      <Hero />
+      <TechStack />
+      <PastWork />
+      <Contact />
+    </main>
   );
 }
