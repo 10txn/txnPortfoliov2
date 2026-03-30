@@ -12,6 +12,21 @@ const projects = [
     "title": "This portfolio",
     "desc": "I designed this portfolio as a simple project but decided to use it as my own portfolio.",
     "link": "https://github.com/10txn/txnPortfoliov2"
+  },
+  {
+    "title": "Old Portfolio",
+    "desc": "My old portfolio",
+    "link": "https://github.com/10txn/portfolio-react"
+  },
+  {
+    "title": "ImGui External Overlay Base",
+    "desc": "Provides an imgui external overlay base for imgui devs",
+    "link": "https://github.com/10txn/ImGui-External-Base"
+  },
+  {
+    "title": "More coming soon",
+    "desc": "More projects will be added soon!",
+    "link": null
   }
 ];
 
