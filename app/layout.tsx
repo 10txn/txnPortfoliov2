@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "10txn - Make your vsions reality",
+  title: "10txn - Make your visions reality",
   description: "Make your visions come to life",
 };
 

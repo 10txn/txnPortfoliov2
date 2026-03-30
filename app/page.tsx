@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-// Assuming Navbar is a default export from your components folder
 import Navbar from "./components/Navbar";
+import LenisProvider from "./components/LenisProvider"; 
 
 const techs = ["Next.js", "Vite", "MongoDB"];
 
@@ -20,9 +20,19 @@ function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col justify-center px-16 overflow-hidden"
     >
-      {/* Vector SVG background */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundImage: "url('/bg.svg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+          opacity: 0.5,
+        }}
+      />
+
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
           backgroundImage: "url('/vector.svg')",
           backgroundRepeat: "no-repeat",
@@ -33,7 +43,7 @@ function Hero() {
       />
 
       {/* Purple glow */}
-      <div className="absolute top-0 right-0 w-3/4 h-full bg-purple-900/50 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-3/4 h-full bg-purple-900/50 rounded-full blur-[140px] pointer-events-none z-0" />
 
       <div className="relative z-10 max-w-2xl">
         <h1
@@ -88,10 +98,7 @@ function TechStack() {
 
       <div className="flex w-max animate-infinite-scroll">
         {scrollingTechs.map((tech, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-center px-12 group"
-          >
+          <div key={index} className="flex items-center justify-center px-12 group">
             <span
               className="text-white/30 text-3xl font-bold tracking-tighter uppercase italic transition-all duration-500 group-hover:text-purple-400 group-hover:scale-110 cursor-default select-none"
               style={{ fontFamily: "var(--font-outfit)" }}
@@ -118,50 +125,20 @@ function TechStack() {
 
 function PastWork() {
   return (
-    <section
-      id="past-work"
-      className="relative min-h-screen px-16 py-32 overflow-hidden"
-    >
+    <section id="past-work" className="relative min-h-screen px-16 py-32 overflow-hidden">
       <div className="absolute bottom-0 left-0 w-2/3 h-2/3 bg-purple-900/30 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="relative z-10">
-        <h2
-          className="text-4xl font-bold text-white mb-2"
-          style={{ fontFamily: "var(--font-outfit)" }}
-        >
-          Past{" "}
-          <span
-            className="text-purple-400 italic"
-            style={{ fontFamily: "var(--font-sail)" }}
-          >
-            Work
-          </span>
+        <h2 className="text-4xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
+          Past <span className="text-purple-400 italic" style={{ fontFamily: "var(--font-sail)" }}>Work</span>
         </h2>
-        <p
-          className="text-gray-500 text-sm mb-14"
-          style={{ fontFamily: "var(--font-outfit)" }}
-        >
+        <p className="text-gray-500 text-sm mb-14" style={{ fontFamily: "var(--font-outfit)" }}>
           Here are some of my recent projects. You can view more via my Github
         </p>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {projects.map(({ title, desc }) => (
-            <div
-              key={title}
-              className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300"
-            >
-              <h3
-                className="text-white font-semibold text-lg mb-2"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                {title}
-              </h3>
-              <p
-                className="text-gray-400 text-sm leading-relaxed"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
-                {desc}
-              </p>
+            <div key={title} className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
+              <h3 className="text-white font-semibold text-lg mb-2" style={{ fontFamily: "var(--font-outfit)" }}>{title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>{desc}</p>
             </div>
           ))}
         </div>
@@ -171,43 +148,19 @@ function PastWork() {
 }
 
 function Contact() {
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = () => {
-    const subject = encodeURIComponent("Portfolio Contact from " + name);
-    const body = encodeURIComponent("Name: " + name + "\n\nMessage:\n" + message);
-    window.location.href = "mailto:drakebouth.gsrp@gmail.com?subject=" + subject + "&body=" + body;
-  };
-
   return (
     <section id="contact" className="relative px-16 py-32 overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-purple-900/25 rounded-full blur-[100px] pointer-events-none" />
-
       <div className="relative z-10 max-w-xl">
-        <h2
-          className="text-4xl font-bold text-white mb-2"
-          style={{ fontFamily: "var(--font-outfit)" }}
-        >
-          Get in{" "}
-          <span
-            className="text-purple-400 italic"
-            style={{ fontFamily: "var(--font-sail)" }}
-          >
-            Touch
-          </span>
+        <h2 className="text-4xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
+          Get in <span className="text-purple-400 italic" style={{ fontFamily: "var(--font-sail)" }}>Touch</span>
         </h2>
-        <p
-          className="text-gray-500 text-sm mb-10"
-          style={{ fontFamily: "var(--font-outfit)" }}
-        >
+        <p className="text-gray-500 text-sm mb-10" style={{ fontFamily: "var(--font-outfit)" }}>
           Have a project in mind? Let us build something great together.
         </p>
-
-        <h2
-          className="text-2xl font-bold text-white mb-2"
-          style={{ fontFamily: "var(--font-outfit)" }}
-        >Not currently taking requests or contacts.</h2>
+        <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
+          Not currently taking requests or contacts.
+        </h2>
       </div>
     </section>
   );
@@ -215,14 +168,14 @@ function Contact() {
 
 export default function Home() {
   return (
-    <main className="bg-black">
-      {/* 1. Navbar added here */}
-      <Navbar /> 
-      
-      <Hero />
-      <TechStack />
-      <PastWork />
-      <Contact />
-    </main>
+    <LenisProvider>
+      <main className="bg-black">
+        <Navbar /> 
+        <Hero />
+        <TechStack />
+        <PastWork />
+        <Contact />
+      </main>
+    </LenisProvider>
   );
 }
