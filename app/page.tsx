@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "./components/Navbar";
 import LenisProvider from "./components/LenisProvider"; 
 
@@ -9,8 +9,9 @@ const techs = ["Next.js", "Vite", "MongoDB"];
 
 const projects = [
   {
-    "title": "Coming Soon",
-    "desc": "I am sorting through my projects. Past projects will be added soon!"
+    "title": "This portfolio",
+    "desc": "I designed this portfolio as a simple project but decided to use it as my own portfolio.",
+    "link": "https://github.com/10txn/txnPortfoliov2"
   }
 ];
 
@@ -42,7 +43,6 @@ function Hero() {
         }}
       />
 
-      {/* Purple glow */}
       <div className="absolute top-0 right-0 w-3/4 h-full bg-purple-900/50 rounded-full blur-[140px] pointer-events-none z-0" />
 
       <div className="relative z-10 max-w-2xl">
@@ -135,9 +135,21 @@ function PastWork() {
           Here are some of my recent projects. You can view more via my Github
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map(({ title, desc }) => (
-            <div key={title} className="border border-white/10 bg-white/5 rounded-xl p-6 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
-              <h3 className="text-white font-semibold text-lg mb-2" style={{ fontFamily: "var(--font-outfit)" }}>{title}</h3>
+          {projects.map(({ title, desc, link }) => (
+            <div key={title} className="group border border-white/10 bg-white/5 rounded-xl p-6 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-white font-semibold text-lg" style={{ fontFamily: "var(--font-outfit)" }}>{title}</h3>
+                {link && (
+                  <a 
+                    href={link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-500 hover:text-purple-400 transition-colors"
+                  >
+                    <FontAwesomeIcon icon={faExternalLinkAlt} className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
               <p className="text-gray-400 text-sm leading-relaxed" style={{ fontFamily: "var(--font-outfit)" }}>{desc}</p>
             </div>
           ))}
