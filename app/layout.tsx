@@ -15,8 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.10txn.com"), // Replace with your actual production domain
   title: "10txn - Make your visions reality",
   description: "Make your visions come to life",
+  alternates: {
+    canonical: "./",
+  },
 };
 
 export default function RootLayout({
