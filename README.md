@@ -4,7 +4,7 @@ This is a complete redesign of my original portfolio.
 
 Live Portfolio:
 
-https://txn-portfolio.vercel.app/
+https://10txn.xyz
 
 Video Referenced For Figma Design:
 
