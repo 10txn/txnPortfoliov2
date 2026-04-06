@@ -27,7 +27,7 @@ const projects = [
     "title": "More coming soon",
     "desc": "More projects will be added soon!",
     "link": null
-  }
+  },
 ];
 
 function Hero() {
@@ -175,6 +175,38 @@ function PastWork() {
 }
 
 function Contact() {
+  const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Submission Error:", err);
+      setStatus("error");
+    }
+  }
+
   return (
     <section id="contact" className="relative px-16 py-32 overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-purple-900/25 rounded-full blur-[100px] pointer-events-none" />
@@ -183,16 +215,54 @@ function Contact() {
           Get in <span className="text-purple-400 italic" style={{ fontFamily: "var(--font-sail)" }}>Touch</span>
         </h2>
         <p className="text-gray-500 text-sm mb-10" style={{ fontFamily: "var(--font-outfit)" }}>
-          Have a project in mind? Let us build something great together.
+          Have a project in mind? Let’s build something great together.
         </p>
-        <h2 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-outfit)" }}>
-          Not currently taking requests or contacts.
-        </h2>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="name" // Matches formData.get("name")
+              placeholder="Name"
+              required
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
+            />
+            <input
+              type="email"
+              name="email" // Matches formData.get("email")
+              placeholder="Email"
+              required
+              className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
+            />
+          </div>
+          <textarea
+            name="message" // Matches formData.get("message")
+            placeholder="Your Message"
+            rows={5}
+            required
+            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
+          />
+          
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-8 py-3 rounded-md transition-all duration-200 flex items-center gap-2 disabled:opacity-50"
+          >
+            {status === "loading" ? "Sending..." : "Send Message"}
+            <FontAwesomeIcon icon={faArrowRight} className="w-3 h-3" />
+          </button>
+
+          {status === "success" && (
+            <p className="text-green-400 text-sm mt-4">Message sent! I'll get back to you soon.</p>
+          )}
+          {status === "error" && (
+            <p className="text-red-400 text-sm mt-4">Something went wrong. Please try again.</p>
+          )}
+        </form>
       </div>
     </section>
   );
 }
-
 export default function Home() {
   return (
     <LenisProvider>
