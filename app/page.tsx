@@ -9,7 +9,7 @@ const techs = ["Next.js", "Vite", "MongoDB"];
 
 const projects = [
   {
-    "title": "This portfolio",
+    "title": "This portfolio (currently privated will be unprivated soon)",
     "desc": "I designed this portfolio as a simple project but decided to use it as my own portfolio.",
     "link": "https://github.com/10txn/txnPortfoliov2"
   },
