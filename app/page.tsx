@@ -9,7 +9,7 @@ const techs = ["Next.js", "Vite", "MongoDB"];
 
 const projects = [
   {
-    "title": "This portfolio (currently privated will be unprivated soon)",
+    "title": "This portfolio",
     "desc": "I designed this portfolio as a simple project but decided to use it as my own portfolio.",
     "link": "https://github.com/10txn/txnPortfoliov2"
   },
@@ -22,6 +22,11 @@ const projects = [
     "title": "ImGui External Overlay Base",
     "desc": "Provides an imgui external overlay base for imgui devs",
     "link": "https://github.com/10txn/ImGui-External-Base"
+  },
+  {
+    "title": "Speed Test",
+    "desc": "Minimalistic speed test built in next",
+    "link": "https://github.com/10txn/Speed-Test"
   },
   {
     "title": "More coming soon",
