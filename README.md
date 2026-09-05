@@ -2,10 +2,6 @@
 
 This is a complete redesign of my original portfolio.
 
-Live Portfolio:
-
-https://10txn.xyz
-
 Video Referenced For Figma Design:
 
 https://www.youtube.com/watch?v=iIhyNCQ7aXE
